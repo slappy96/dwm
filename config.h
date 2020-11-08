@@ -65,6 +65,7 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "st", NULL };
 
 #include <X11/XF86keysym.h>
+#include "shiftview.c"
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -107,6 +108,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ MODKEY,             		XK_semicolon, shiftview,   {.i = +1 } },
+	{ MODKEY,             		XK_g, shiftview,           {.i = -1 } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
