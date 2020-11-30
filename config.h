@@ -79,6 +79,7 @@ static Key keys[] = {
 	{ MODKEY,             		XK_v,      spawn,          SHCMD("virt-manager") },
 	{ MODKEY,             		XK_w,      spawn,          SHCMD("$BROWSER") },
 	{ MODKEY|ShiftMask,            	XK_w,      spawn,          SHCMD("st -e nmtui") },
+	{ MODKEY,            	        XK_m,      spawn,      	   SHCMD("st -e cmus") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
