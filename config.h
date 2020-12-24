@@ -109,8 +109,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	{ MODKEY,             			XK_semicolon, shiftview,   {.i = +1 } },
 	{ MODKEY,             			XK_g, shiftview,           {.i = -1 } },
-	{ MODKEY,						XK_minus,	spawn,		SHCMD("pamixer --allow-boost -d 10") },
-	{ MODKEY,						XK_equal,	spawn,		SHCMD("pamixer --allow-boost -i 10") },
+	{ MODKEY,						XK_minus,	spawn,		SHCMD("pamixer --allow-boost -d 6") },
+	{ MODKEY,						XK_equal,	spawn,		SHCMD("pamixer --allow-boost -i 6") },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
