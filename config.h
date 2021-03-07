@@ -1,3 +1,4 @@
+
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
@@ -13,19 +14,19 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "JetBrains Mono NL:size=11", "fontawesome:size=11" };
 static const char dmenufont[]       = "JetBrains Mono NL:size=11";
 /* background color */
-static const char col_gray1[]       = "#000000";
+static const char col_black[]       = "#000000";
 /* inactive window border color */
 static const char col_gray2[]       = "#444444";
 /* font color */
-static const char col_gray3[]       = "#177ed4"; /*was #bbbbbb */
+static const char col_olive[]       = "#5f5f00"; /*was #bbbbbb */
 /* current tag and font color */
-static const char col_gray4[]       = "#eeeeee";
+static const char col_gray4[]       = "#767676";
 /* top bar second color and active window border color */
-static const char col_shrike_orange[]         = "#d46d17";
+static const char col_dark_red[]         = "#5f0000";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_shrike_orange,  col_shrike_orange  },
+	[SchemeNorm] = { col_olive, col_black, col_gray2 },
+	[SchemeSel]  = { col_gray4, col_dark_red,  col_dark_red  },
 };
 
 /* tagging */
@@ -39,7 +40,7 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
-	{ "Steam",    NULL,       NULL,       0,            0,           -1 },
+	{ "Steam",    NULL,       NULL,       0,            1,           -1 },
 };
 
 /* layout(s) */
@@ -67,7 +68,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_shrike_orange, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_olive, "-nf", col_black, "-sb", col_dark_red, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 #include <X11/XF86keysym.h>
