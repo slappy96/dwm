@@ -70,6 +70,8 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_olive, "-nf", col_black, "-sb", col_dark_red, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
+static const char scratchpadname[] = "scratchpad";
+static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 
 #include <X11/XF86keysym.h>
 #include "shiftview.c"
@@ -79,6 +81,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,             		XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,             		XK_v,      spawn,          SHCMD("virt-manager") },
+	{ MODKEY,             		XK_grave,  togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,             		XK_w,      spawn,          SHCMD("$BROWSER") },
 	{ MODKEY|ShiftMask,            	XK_w,      spawn,          SHCMD("st -e nmtui") },
 	{ MODKEY,            	        XK_m,      spawn,      	   SHCMD("st -e cmus") },
