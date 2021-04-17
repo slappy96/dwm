@@ -41,6 +41,7 @@ static const Rule rules[] = {
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
 	{ "Steam",    NULL,       NULL,       0,            1,           -1 },
+	{ "Lutris",   NULL,       NULL,       0,            1,           -1 },
 };
 
 /* layout(s) */
@@ -53,6 +54,8 @@ static const Layout layouts[] = {
 	{ "[]=",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
+	{ "|M|",      centeredmaster },
+	{ ">M>",      centeredfloatingmaster },
 };
 
 /* key definitions */
@@ -81,7 +84,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,             		XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,             		XK_v,      spawn,          SHCMD("virt-manager") },
-	{ MODKEY,             		XK_grave,  togglescratch,  {.v = scratchpadcmd } },
+	{ MODKEY|ShiftMask,            	XK_s,      togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,             		XK_w,      spawn,          SHCMD("$BROWSER") },
 	{ MODKEY|ShiftMask,            	XK_w,      spawn,          SHCMD("st -e nmtui") },
 	{ MODKEY,            	        XK_m,      spawn,      	   SHCMD("st -e cmus") },
@@ -105,7 +108,10 @@ static Key keys[] = {
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_y,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} }, { MODKEY,                       XK_0,      view,           {.ui = ~0 } },
+	{ MODKEY,                       XK_c,      setlayout,      {.v = &layouts[3]} },
+	{ MODKEY,                       XK_o,      setlayout,      {.v = &layouts[4]} },
+	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
