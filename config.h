@@ -31,6 +31,7 @@ static const char *colors[][3]      = {
 
 /* tagging */
  static const char *tags[] = { " ", " ", " ", " ", " ", " ", " ", " ", " " };
+ static const char *tagsalt[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -121,6 +122,7 @@ static Key keys[] = {
 	{ MODKEY,             		XK_g, shiftview,           {.i = -1 } },
 	{ MODKEY,			XK_minus,	spawn,		SHCMD("pamixer --allow-boost -d 6") },
 	{ MODKEY,			XK_equal,	spawn,		SHCMD("pamixer --allow-boost -i 6") },
+	{ MODKEY,                       XK_n,      togglealttag,   {0} },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
