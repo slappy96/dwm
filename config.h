@@ -11,7 +11,7 @@ static const unsigned int gappov    = 10;       /* vert outer gap between window
 static const int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "JetBrains Mono:size=12", "fontawesome:size=11" };
+static const char *fonts[]          = { "JetBrains Mono:size=11", "fontawesome:size=11" };
 static const char dmenufont[]       = "JetBrains Mono:size=11";
 /* background color */
 static const char col_black[]       = "#000000";
@@ -83,12 +83,11 @@ static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,             		XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,             		XK_v,      spawn,          SHCMD("virt-manager") },
-	{ MODKEY|ShiftMask,            	XK_s,      togglescratch,  {.v = scratchpadcmd } },
-	{ MODKEY,             		XK_w,      spawn,          SHCMD("$BROWSER") },
+	{ MODKEY,             		    XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,             		    XK_v,      spawn,          SHCMD("virt-manager") },
+	{ MODKEY,             		    XK_w,      spawn,          SHCMD("$BROWSER") },
 	{ MODKEY|ShiftMask,            	XK_w,      spawn,          SHCMD("st -e nmtui") },
-	{ MODKEY,            	        XK_m,      spawn,      	   SHCMD("st -e cmus") },
+	{ MODKEY,            	        XK_m,      togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,            	        XK_e,      spawn,      	   SHCMD("st -e neomutt") },
 	{ MODKEY,            	        XK_s,      spawn,      	   SHCMD("steam") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
@@ -98,14 +97,14 @@ static Key keys[] = {
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	{ MODKEY,              		XK_z,      incrgaps,       {.i = +1 } },
-	{ MODKEY,              		XK_x,      incrgaps,       {.i = -1 } },
-	{ MODKEY,              		XK_a,      togglegaps,     {0} },
-	{ MODKEY|ShiftMask,    		XK_a,      defaultgaps,    {0} },
-	{ MODKEY,             		XK_space,  zoom,           {0} },
+	{ MODKEY,              		    XK_z,      incrgaps,       {.i = +1 } },
+	{ MODKEY,              		    XK_x,      incrgaps,       {.i = -1 } },
+	{ MODKEY,              		    XK_a,      togglegaps,     {0} },
+	{ MODKEY|ShiftMask,    		    XK_a,      defaultgaps,    {0} },
+	{ MODKEY,             		    XK_space,  zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY,             		XK_q,      killclient,     {0} },
-	{ MODKEY,             		XK_f,      fullscreen,     {0} },
+	{ MODKEY,						XK_q,      killclient,     {0} },
+	{ MODKEY,             			XK_f,      fullscreen,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_y,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[2]} },
@@ -118,10 +117,10 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	{ MODKEY,             		XK_semicolon, shiftview,   {.i = +1 } },
-	{ MODKEY,             		XK_g, shiftview,           {.i = -1 } },
-	{ MODKEY,			XK_minus,	spawn,		SHCMD("pamixer --allow-boost -d 6") },
-	{ MODKEY,			XK_equal,	spawn,		SHCMD("pamixer --allow-boost -i 6") },
+	{ MODKEY,						XK_semicolon, shiftview,   {.i = +1 } },
+	{ MODKEY,             			XK_g, shiftview,           {.i = -1 } },
+	{ MODKEY,						XK_minus,	spawn,		SHCMD("pamixer --allow-boost -d 6") },
+	{ MODKEY,						XK_equal,	spawn,		SHCMD("pamixer --allow-boost -i 6") },
 	{ MODKEY,                       XK_n,      togglealttag,   {0} },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
@@ -135,7 +134,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	{ 0, XF86XK_MonBrightnessUp,	spawn,		SHCMD("xbacklight -inc 10") },
 	{ 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("xbacklight -dec 15") },
-	{ 0, XF86XK_AudioMute,		spawn,		SHCMD("pamixer -t") },
+	{ 0, XF86XK_AudioMute,		    spawn,		SHCMD("pamixer -t") },
 	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("pamixer --allow-boost -i 3") },
 	{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("pamixer --allow-boost -d 3") },
 };
