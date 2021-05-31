@@ -13,20 +13,16 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "JetBrains Mono:size=11", "fontawesome:size=11" };
 static const char dmenufont[]       = "JetBrains Mono:size=11";
-/* background color */
-static const char col_black[]       = "#000000";
-/* inactive window border color */
-static const char col_gray2[]       = "#444444";
-/* font color */
-static const char col_olive[]       = "#5f5f00"; /*was #bbbbbb */
-/* current tag and font color */
-static const char col_gray4[]       = "#767676";
-/* top bar second color and active window border color */
-static const char col_dark_red[]         = "#5f0000";
-static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { col_olive, col_black, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_dark_red,  col_dark_red  },
+static char normbgcolor[]           = "#222222";
+static char normbordercolor[]       = "#444444";
+static char normfgcolor[]           = "#bbbbbb";
+static char selfgcolor[]            = "#eeeeee";
+static char selbordercolor[]        = "#005577";
+static char selbgcolor[]            = "#005577";
+static char *colors[][3] = {
+       /*               fg           bg           border   */
+       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
+       [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
 };
 
 /* tagging */
@@ -73,7 +69,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_olive, "-nf", col_black, "-sb", col_dark_red, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
@@ -118,6 +114,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ MODKEY,                       XK_F5,     xrdb,           {.v = NULL } },
 	{ MODKEY,						XK_semicolon, shiftview,   {.i = +1 } },
 	{ MODKEY,             			XK_g, shiftview,           {.i = -1 } },
 	{ MODKEY,						XK_minus,	spawn,		SHCMD("pamixer --allow-boost -d 6") },
