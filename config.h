@@ -17,7 +17,7 @@ static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
 static char selfgcolor[]            = "#eeeeee";
-static char selbordercolor[]        = "#005577";
+static char selbordercolor[]        = "#890D03"; /*005577 old blue style*/
 static char selbgcolor[]            = "#005577";
 static char *colors[][3] = {
        /*               fg           bg           border   */
@@ -36,8 +36,9 @@ static const Rule rules[] = {
 	 */
 	/* class           instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",          NULL,       NULL,       1 << 7,       0,           -1 },
-	{ "Brave-browser", NULL,       NULL,       1 << 1,       0,           -1 },
+	{ "firefox",       NULL,       NULL,       1 << 1,       0,           -1 },
 	{ "Steam",         NULL,       NULL,       1 << 8,       1,           -1 },
+	{ "St",            NULL,     "/usr/bin/neomutt",       1 << 2,       0,           -1 },
 	{ "Lutris",        NULL,       NULL,       1 << 8,       1,           -1 },
 	{ "Virt-manager",  NULL,       NULL,       1 << 6,       0,           -1 },
 };
@@ -79,35 +80,28 @@ static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
+	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,             		    XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,             		    XK_v,      spawn,          SHCMD("virt-manager") },
-	{ MODKEY,             		    XK_w,      spawn,          SHCMD("$BROWSER") },
-	{ MODKEY|ShiftMask,            	XK_w,      spawn,          SHCMD("st -e nmtui") },
-	{ MODKEY,            	        XK_m,      togglescratch,  {.v = scratchpadcmd } },
-	{ MODKEY,            	        XK_e,      spawn,      	   SHCMD("st -e neomutt") },
-	{ MODKEY,            	        XK_s,      spawn,      	   SHCMD("steam") },
-	{ MODKEY,                       XK_b,      togglebar,      {0} },
-	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	{ MODKEY,              		    XK_z,      incrgaps,       {.i = +1 } },
-	{ MODKEY,              		    XK_x,      incrgaps,       {.i = -1 } },
-	{ MODKEY,              		    XK_a,      togglegaps,     {0} },
-	{ MODKEY|ShiftMask,    		    XK_a,      defaultgaps,    {0} },
-	{ MODKEY,             		    XK_space,  zoom,           {0} },
+	{ MODKEY,             		XK_x,      incrgaps,       {.i = -1 } },
+	{ MODKEY,              		XK_a,      togglegaps,     {0} },
+	{ MODKEY|ShiftMask,    		XK_a,      defaultgaps,    {0} },
+	{ MODKEY,             		XK_space,  zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY,						XK_q,      killclient,     {0} },
-	{ MODKEY,             			XK_f,      fullscreen,     {0} },
+	{ MODKEY,			XK_q,      killclient,     {0} },
+	{ MODKEY,             		XK_f,      fullscreen,     {0} },
+	{ MODKEY,             		XK_h,      setmfact,       {.f = -0.05} },
+	{ MODKEY,             		XK_l,      setmfact,       {.f = +0.05} },
+	{ MODKEY,             		XK_i,      incnmaster,     {.i = +1 } },
+	{ MODKEY,             		XK_d,      incnmaster,     {.i = -1 } },
+	{ MODKEY,             		XK_j,      focusstack,     {.i = +1 } },
+	{ MODKEY,             		XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_y,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_c,      setlayout,      {.v = &layouts[3]} },
 	{ MODKEY,                       XK_o,      setlayout,      {.v = &layouts[4]} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+	{ MODKEY,                       XK_s,      togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
@@ -115,11 +109,20 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	{ MODKEY,                       XK_F5,     xrdb,           {.v = NULL } },
-	{ MODKEY,						XK_semicolon, shiftview,   {.i = +1 } },
-	{ MODKEY,             			XK_g, shiftview,           {.i = -1 } },
-	{ MODKEY,						XK_minus,	spawn,		SHCMD("pamixer --allow-boost -d 6") },
-	{ MODKEY,						XK_equal,	spawn,		SHCMD("pamixer --allow-boost -i 6") },
+	{ MODKEY,			XK_semicolon, shiftview,   {.i = +1 } },
+	{ MODKEY,             		XK_g,      shiftview,      {.i = -1 } },
+	{ MODKEY,			XK_minus,  spawn,	   SHCMD("") },
+	{ MODKEY,			XK_equal,  spawn,	   SHCMD("") },
+	{ MODKEY,			XK_w,	   spawn,	   SHCMD("$BROWSER") },
+	{ MODKEY,			XK_m,	   spawn,	   SHCMD("dm-master") },
+	{ MODKEY,			XK_e,	   spawn,	   SHCMD("st -e /usr/bin/neomutt") },
 	{ MODKEY,                       XK_n,      togglealttag,   {0} },
+	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ 0, XF86XK_MonBrightnessUp,	spawn,			   SHCMD("xbacklight -inc 10") },
+	{ 0, XF86XK_MonBrightnessDown,	spawn,		           SHCMD("xbacklight -dec 15") },
+	{ 0, XF86XK_AudioMute,		spawn,	                   SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle") },
+	{ 0, XF86XK_AudioRaiseVolume,	spawn,		           SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+") },
+	{ 0, XF86XK_AudioLowerVolume,	spawn,		           SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-") },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -129,12 +132,6 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-	{ 0, XF86XK_MonBrightnessUp,	spawn,		SHCMD("xbacklight -inc 10") },
-	{ 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("xbacklight -dec 15") },
-	{ 0, XF86XK_AudioMute,		    spawn,		SHCMD("pamixer -t") },
-	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("pamixer --allow-boost -i 3") },
-	{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("pamixer --allow-boost -d 3") },
 };
 
 /* button definitions */
