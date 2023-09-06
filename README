@@ -20,5 +20,3 @@ sudo make install
 uninstall
 =========
 sudo make uninstall
-
-TESTING FOR BARE
